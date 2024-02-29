@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <record id="reel_property_form_view" model="ir.ui.view">
+    <field name="name">reel.property.form.view</field>
+    <field name="model">reel.property</field>
+    <field name="arch" type="xml">
+      <form>
+        <field name="name"/>
+        <field name="construction_date"/>
+        <field name="area"/>
+      </form>
+    </field>
+  </record>
+
+  <record id="reel_property_tree_view" model="ir.ui.view">
+    <field name="name">reel.property.tree.view</field>
+    <field name="model">reel.property</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="construction_date"/>
+        <field name="area"/>
+      </tree>
+    </field>
+  </record>
+
+  <menuitem id="reel_property_menu" name="Reel State" parent="real_state_root" sequence="10"/>
+
+</odoo>

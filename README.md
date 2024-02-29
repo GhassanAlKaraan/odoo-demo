@@ -1,26 +1,33 @@
 # My first Odoo project
 
-## Steps
+## Setup
 
-You need to setup odoo-17.0 with python3.10 on your machine first \
+First, complete the odoo setup on your machine with python 3.10 \
 [See How](https://www.odoo.com/documentation/15.0/administration/install/source.html)
 
-Project Folder (C:\Odoo\) \
+Project Folder C:\odoo-projects\Odoo\ \
 | \
-|-- gts-btco (custom module) \
-|-- odoo-17.0 (*clone odoo repo and install requirements*)
+|-- custom_modules \
+|-- odoo-17.0 (*clone [odoo repo](https://github.com/odoo/odoo) and install requirements*)
+|-- conf/odoo.conf
 
-### Enter the odoo repo directory
+## Run the server with configs
 
-` cd odoo-17.0 `
+`python odoo-bin -c C:\odoo-projects\Odoo\conf\odoo.conf`
 
-### Run local server + add custom module
+## Run server manually
 
-` python odoo-bin -r odoo -w odoo --addons-path=addons,C:\Odoo\gts-btco -d PostgreSQL `
+`cd odoo-17.0`
 
-### Run server in shell session
+username = odoo, \
+password = odoo, \
+database = PostgreSQL \
 
-` python odoo-bin shell -r odoo -w odoo --addons-path=addons,C:\Odoo\gts-btco -d PostgreSQL `
+`python odoo-bin -r odoo -w odoo --addons-path=addons,..\custom_modules -d PostgreSQL`
+
+or Run server in shell session
+
+`python odoo-bin shell -r odoo -w odoo --addons-path=addons,..\custom_modules -d PostgreSQL`
 
 Querying examples:
 
@@ -31,6 +38,6 @@ Apply changes to database:
 
 `self.env.cr.commit()`
 
-### Scaffold a module
+Scaffold a module:
 
-`python odoo-bin scaffold scaffolded_module C:\Odoo\gts-btco`
+`python odoo-bin scaffold scaffolded_module C:\odoo-projects\Odoo\custom_modules`

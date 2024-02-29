@@ -1,9 +1,6 @@
 #odoo files
 odoo-17.0
 
-# vscode
-.vscode
-
 # sphinx build directories
 _build/
 
