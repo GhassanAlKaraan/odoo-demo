@@ -8,7 +8,7 @@ First, complete the odoo setup on your machine with python 3.10 \
 Project Folder C:\odoo-projects\Odoo\ \
 | \
 |-- custom_modules \
-|-- odoo-17.0 (*clone [odoo repo](https://github.com/odoo/odoo) and install requirements*)
+|-- odoo-17.0 (*clone [odoo repo](https://github.com/odoo/odoo) and install requirements*) \
 |-- conf/odoo.conf
 
 ## Run the server with configs
