@@ -1,14 +1,29 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-  <!-- Form -->
+
+  <!-- Form 1-->
   <record id="reel_property_form_view" model="ir.ui.view">
-    <field name="name">reel.property.form.view</field>
+    <field name="name">Reel Property view 1</field>
     <field name="model">reel.property</field>
+    <field name="priority">16</field>
     <field name="arch" type="xml">
       <form>
         <field name="name"/>
         <field name="construction_date"/>
         <field name="area"/>
+      </form>
+    </field>
+  </record>
+
+  <!-- Form 2-->
+  <record id="reel_property_form_view_2" model="ir.ui.view">
+    <field name="name">Reel Property view 2</field>
+    <field name="model">reel.property</field>
+    <field name="priority">16</field>
+    <field name="arch" type="xml">
+      <form>
+        <field name="name"/>
+        <field name="construction_date"/>
       </form>
     </field>
   </record>
@@ -26,14 +41,21 @@
     </field>
   </record>
 
+  <!-- Action -->
+  <record id="reel_property_action" model="ir.actions.act_window">
+    <field name="name">Properties</field>
+    <!-- <field name="type">ir.actions.act_window</field> -->
+    <field name="res_model">reel.property</field>
+    <field name="view_mode">tree,form</field> <!-- Define the order-->
+  </record>
+
   <!-- Root -->
-  <record id="reel_state_root" model="ir.ui.view">
-    <field name="name">Real State</field>
+  <record id="reel_state_root" model="ir.ui.menu">
+    <field name="name">Reel State</field>
   </record>
 
   <!-- Menu Items -->
-  <menuitem id="reel_property_menu" name="Properties" parent="real_state_root" sequence="10"/>
-
-  <menuitem id="reel_property_2_menu" name="Properties 2" parent="real_state_root" sequence="20"/>
+  <menuitem id="reel_property_menu" name="Properties" parent="reel_state_root" sequence="10" action="reel_property_action"/>
+  <menuitem id="reel_property_2_menu" name="Properties 2" parent="reel_state_root" sequence="20" action="reel_property_action"/>
 
 </odoo>
