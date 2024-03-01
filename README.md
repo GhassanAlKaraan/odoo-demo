@@ -15,6 +15,10 @@ Project Folder C:\odoo-projects\Odoo\ \
 
 `python odoo-bin -c C:\odoo-projects\Odoo\conf\odoo.conf`
 
+or with full path:
+
+`python C:\odoo-projects\Odoo\odoo-17.0\odoo-bin -c C:\odoo-projects\Odoo\conf\odoo.conf`
+
 ## Run server manually
 
 `cd odoo-17.0`

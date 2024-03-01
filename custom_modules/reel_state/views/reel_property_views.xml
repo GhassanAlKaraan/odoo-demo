@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+  <!-- Form -->
   <record id="reel_property_form_view" model="ir.ui.view">
     <field name="name">reel.property.form.view</field>
     <field name="model">reel.property</field>
@@ -12,6 +13,7 @@
     </field>
   </record>
 
+  <!-- Tree -->
   <record id="reel_property_tree_view" model="ir.ui.view">
     <field name="name">reel.property.tree.view</field>
     <field name="model">reel.property</field>
@@ -24,6 +26,14 @@
     </field>
   </record>
 
-  <menuitem id="reel_property_menu" name="Reel State" parent="real_state_root" sequence="10"/>
+  <!-- Root -->
+  <record id="reel_state_root" model="ir.ui.view">
+    <field name="name">Real State</field>
+  </record>
+
+  <!-- Menu Items -->
+  <menuitem id="reel_property_menu" name="Properties" parent="real_state_root" sequence="10"/>
+
+  <menuitem id="reel_property_2_menu" name="Properties 2" parent="real_state_root" sequence="20"/>
 
 </odoo>
