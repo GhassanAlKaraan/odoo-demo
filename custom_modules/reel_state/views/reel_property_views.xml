@@ -8,9 +8,22 @@
     <field name="priority">16</field>
     <field name="arch" type="xml">
       <form>
-        <field name="name"/>
-        <field name="construction_date"/>
-        <field name="area"/>
+        <sheet>
+          <div role="alert" class="alert alert-success">
+            This is rendered through view 1
+          </div>
+          <group>
+
+            <group string="Column 1">
+              <field name="name"/>
+              <field name="area"/>
+              <field name="type"/>
+            </group>
+            <group string="Column 2">
+              <field name="construction_date"/>
+            </group>
+          </group>
+        </sheet>
       </form>
     </field>
   </record>
@@ -22,8 +35,22 @@
     <field name="priority">16</field>
     <field name="arch" type="xml">
       <form>
-        <field name="name"/>
-        <field name="construction_date"/>
+        <sheet>
+          <div role="alert" class="alert alert-info">
+            This is rendered through view 2
+          </div>
+          <group>
+            <group string="Column 1">
+              <field name="name"/>
+              <field name="area"/>
+              <field name="type"/>
+            </group>
+            <group string="Column 2">
+              <field name="construction_date"/>
+            </group>
+          </group>
+
+        </sheet>
       </form>
     </field>
   </record>
@@ -37,25 +64,45 @@
         <field name="name"/>
         <field name="construction_date"/>
         <field name="area"/>
+        <field name="type"/>
       </tree>
     </field>
   </record>
 
-  <!-- Action -->
+  <!-- Action 1 -->
   <record id="reel_property_action" model="ir.actions.act_window">
     <field name="name">Properties</field>
-    <!-- <field name="type">ir.actions.act_window</field> -->
     <field name="res_model">reel.property</field>
-    <field name="view_mode">tree,form</field> <!-- Define the order-->
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('type', '=', 'view_1')]</field>
+    <field name="view_ids" eval="[(5, 0, 0),
+                                (0, 0, {'view_mode': 'tree', 'view_id': ref('reel_property_tree_view')}),
+                                (0, 0, {'view_mode': 'form', 'view_id': ref('reel_property_form_view')})
+                                ]"/>
   </record>
 
-  <!-- Root -->
-  <record id="reel_state_root" model="ir.ui.menu">
-    <field name="name">Reel State</field>
+  <!-- Action 2 -->
+  <record id="reel_property_action_2" model="ir.actions.act_window">
+    <field name="name">Properties 2</field>
+    <field name="res_model">reel.property</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('type', '=', 'view_2')]</field>
+    <field name="view_ids" eval="[(5, 0, 0),
+                                (0, 0, {'view_mode': 'tree', 'view_id': ref('reel_property_tree_view')}),
+                                (0, 0, {'view_mode': 'form', 'view_id': ref('reel_property_form_view_2')})
+                                ]"/>
   </record>
+
+
+  <!-- Root -->
+  <!-- <record id="reel_state_root" model="ir.ui.menu">
+    <field name="name">Reel State</field>
+  </record> -->
+
+  <menuitem id="reel_state_root" name="Reel State" sequence="0" web_icon="reel_state, static/description/icon.png"/>
 
   <!-- Menu Items -->
   <menuitem id="reel_property_menu" name="Properties" parent="reel_state_root" sequence="10" action="reel_property_action"/>
-  <menuitem id="reel_property_2_menu" name="Properties 2" parent="reel_state_root" sequence="20" action="reel_property_action"/>
+  <menuitem id="reel_property_2_menu" name="Properties 2" parent="reel_state_root" sequence="20" action="reel_property_action_2"/>
 
 </odoo>

@@ -7,7 +7,10 @@
     'category': 'Real Estate/Real Estate',
     'website': 'https://www.odoo.com',
     'depends': ['base'],
-    'data':['views/reel_property_views.xml'],
+    'data':[
+        'security/ir.model.access.csv',
+        'views/reel_property_views.xml'
+        ],
     'installable': True,
     'application': True,
     'auto_install': False,

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reel_property,access_reel_property,reel_state.model_reel_property,,1,1,1,1
