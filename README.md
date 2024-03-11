@@ -17,7 +17,7 @@ Project Folder C:\odoo-projects\Odoo\ \
 
 or with full path:
 
-`python C:\odoo-projects\Odoo\odoo-17.0\odoo-bin -c C:\odoo-projects\Odoo\conf\odoo.conf`
+```python C:\odoo-projects\Odoo\odoo-17.0\odoo-bin -c C:\odoo-projects\Odoo\conf\odoo.conf```
 
 ## Run server manually
 

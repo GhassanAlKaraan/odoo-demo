@@ -9,7 +9,8 @@
     'depends': ['base'],
     'data':[
         'security/ir.model.access.csv',
-        'views/reel_property_views.xml'
+        'views/reel_property_views.xml',
+        'views/reel_room_views.xml'
         ],
     'installable': True,
     'application': True,

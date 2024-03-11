@@ -19,9 +19,16 @@
               <field name="area"/>
               <field name="type"/>
             </group>
+
             <group string="Column 2">
+              <field name="parent_id"/>
               <field name="construction_date"/>
             </group>
+
+            <group>
+              <field name="room_ids"/>
+            </group>
+
           </group>
         </sheet>
       </form>
@@ -46,6 +53,7 @@
               <field name="type"/>
             </group>
             <group string="Column 2">
+              
               <field name="construction_date"/>
             </group>
           </group>
