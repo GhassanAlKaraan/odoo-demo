@@ -15,7 +15,13 @@ class ReelProperty(models.Model):
     type = fields.Selection([('view_1', 'View 1'), ('view_2', 'View 2')], default ="view_1", string='View Type',) # dropdown
 
     # Relational fields
-    parent_id = fields.Many2one('reel.property', string='Parent Property') # cyclic
-    child_ids = fields.One2many('reel.property', 'parent_id') # cyclic
+
+    # Cyclic relationship: prop can be a building parent of another prop apartment
+    parent_id = fields.Many2one('reel.property', string='Parent Property')
+    child_ids = fields.One2many('reel.property', 'parent_id')
     
-    room_ids = fields.One2many('reel.room', 'property_id', string='Rooms') # prop 1..1 --> rooms 0..*
+    room_ids = fields.One2many(comodel_name='reel.room', inverse_name='property_id', string='Rooms', domain=[('type', 'in', ['bedroom', 'bathroom', 'kitchen'])], limit=3) # prop 1..1 --> rooms 0..*
+
+    # No need for a new model. We'll use existing model: res.partner
+    tenant_ids = fields.Many2many('res.partner', string='Tenants') # prop 1..* --> tenants 0..*
+    investor_ids = fields.Many2many(comodel_name='res.partner', relation='property_investors_rel', column1='property_id', column2='investor_id', string='Investors') # prop 1..* --> investors 0..*

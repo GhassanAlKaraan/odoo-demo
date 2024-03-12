@@ -21,15 +21,18 @@
             </group>
 
             <group string="Column 2">
-              <field name="parent_id"/>
+              <field name="parent_id" domain="[('id', '!=', id)]"/>
               <field name="construction_date"/>
             </group>
 
-            <group>
-              <field name="room_ids"/>
-            </group>
-
           </group>
+
+          <group> <!-- Embedded View-->
+            <field name="room_ids"/>
+            <field name="tenant_ids"/>
+            <field name="investor_ids"/>
+          </group>
+
         </sheet>
       </form>
     </field>
@@ -53,7 +56,7 @@
               <field name="type"/>
             </group>
             <group string="Column 2">
-              
+
               <field name="construction_date"/>
             </group>
           </group>
