@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_reel_property,access_reel_property,reel_state.model_reel_property,,1,1,1,1
 access_reel_room,access_reel_room,reel_state.model_reel_room,,1,1,1,1
+access_reel_tag,access_reel_tag,reel_state.model_reel_tag,,1,1,1,1
