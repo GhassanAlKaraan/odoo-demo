@@ -46,7 +46,7 @@
             <field name="investor_ids"/> -->
             <group>
               <field name='tag_ids'>
-                <tree editable="bottom"> <!-- Doesn't work, bcuz it's a Many2Many-->
+                <tree>
                   <field name="name"/>
                   <field name="color"/>
                 </tree>

@@ -13,10 +13,9 @@ class ReelProperty(models.Model):
     
     
     landlord_id = fields.Many2one('res.partner', string='Landlord', required=True)
-    
     # Logical fields, computed on the flight, not saved in db
-    landlord_phone = fields.Char(store=True, related='landlord_id.phone', readonly=False)
-    landlord_email = fields.Char(store=True, related='landlord_id.email', readonly=False)
+    landlord_phone = fields.Char(related='landlord_id.phone', store=True, readonly=False)
+    landlord_email = fields.Char(related='landlord_id.email', store=True, readonly=False)
     
     
     
