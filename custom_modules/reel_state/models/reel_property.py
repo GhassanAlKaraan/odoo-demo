@@ -18,6 +18,12 @@ class ReelProperty(models.Model):
     landlord_email = fields.Char(related='landlord_id.email', store=True, readonly=False)
     
     
+    landlord_info = fields.Char(compute="_compute_landlord_info", store=True, readonly=False)
+    
+    def _compute_landlord_info(self):
+        for record in self:
+            record.landlord_info = record.landlord_id.name +'' + record.landlord_id.phone
+    
     
     construction_date = fields.Date(string='Construction Date', required=True, default=fields.Date.today())
     area = fields.Float(string='Area')
