@@ -1,5 +1,5 @@
 {
     "python.analysis.extraPaths": [
-        "./odoo-17.0"
+        "../odoo-17.0"
     ]
 }

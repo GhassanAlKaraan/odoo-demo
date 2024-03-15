@@ -8,6 +8,9 @@
     <field name="priority">16</field>
     <field name="arch" type="xml">
       <form>
+        <header>
+          <button name="test_search" string="Test Search" type="object" class="oe_highlight"/>
+        </header>
         <sheet>
           <div role="alert" class="alert alert-success">
             This is rendered through view 1
@@ -25,6 +28,8 @@
               <field name="landlord_id"/>
               <field name="landlord_phone"/>
               <field name="landlord_email"/>
+              <field name="landlord_info"/>
+              <field name="number_of_properties" string='Owned Properties'/>
             </group>
 
             <group string="Misc.">
