@@ -1,14 +1,12 @@
-# My first Odoo project
+# My Odoo project
 
-## Setup
+## Setup on Windows
 
-**1- Prepare odoo sdk on your machine with python 3.10 :** [See How](https://www.odoo.com/documentation/15.0/administration/install/source.html)
+**1- Prepare odoo sdk on your machine with python 3.10 :**
 
--odoo-17.0 (*clone [odoo repo](https://github.com/odoo/odoo) and install requirements*) \
--Project Root Folder **You are here: C:\odoo-projects\Odoo** \
-| \
-|-- conf/odoo.conf \
-|-- custom_modules \
+a. Create a folder C:/Odoo/ and navigate to it\
+b. Clone odoo repo: `git clone https://github.com/odoo/odoo.git` \
+c. Create a python venv in C:/Odoo/odoo-17.0, and [install requirements](https://www.odoo.com/documentation/15.0/administration/install/source.html)
 
 **2- Prepare postgres database:**
 
@@ -16,22 +14,22 @@
 *password = odoo,* \
 *database = PostgreSQL*
 
-## Run the server with configs
+I added those credentials to conf/odoo.conf
 
-`python ..\odoo-17.0\odoo-bin -c ..\conf\odoo.conf`
+## Run the server
 
-**or using full path:**
+`python C:\Odoo\odoo-17.0\odoo-bin -c .\conf\odoo.conf`
 
-`python C:\odoo-projects\Odoo\odoo-17.0\odoo-bin -c C:\odoo-projects\Odoo\conf\odoo.conf`
+Or run server in shell session:
 
-## Run server manually
+`python C:\Odoo\odoo-17.0\odoo-bin shell -c .\conf\odoo.conf`
 
-`python cd ..\odoo-17.0\odoo-bin -r odoo -w odoo --addons-path=addons,..\custom_modules -d PostgreSQL`
+Or run **without** the config file:
 
-**or run server in shell session:**
+`python C:\Odoo\odoo-17.0\odoo-bin -r odoo -w odoo --addons-path=addons,.\custom_modules -d PostgreSQL`
 
-`python odoo-bin shell -r odoo -w odoo --addons-path=addons,..\custom_modules -d PostgreSQL`
+## Get started
 
-## Scaffold a module
+Scaffold a module:
 
 `python odoo-bin scaffold scaffolded_module C:\odoo-projects\Odoo\custom_modules`
