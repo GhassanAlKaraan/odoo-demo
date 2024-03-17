@@ -1,5 +1,5 @@
 {
     "python.analysis.extraPaths": [
-        "../odoo-17.0"
+        "C:/Odoo/odoo-17.0"
     ]
 }

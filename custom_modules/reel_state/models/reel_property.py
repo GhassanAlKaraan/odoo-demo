@@ -1,9 +1,15 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 class ReelProperty(models.Model):
     # Model name and description
     _name ='reel.property'
+    
+    _sql_constraints = [
+        ('name_unique', 'UNIQUE(name)', 'Property name must be unique!')
+    ]
+    
+    
     # _table = 'gts_reel_property'
     _description = 'Reel Property'
     _rec_name = 'name'
@@ -50,6 +56,14 @@ class ReelProperty(models.Model):
             record.landlord_phone = record.landlord_info.split(' ')[1].strip('()')
     
     construction_date = fields.Date(string='Construction Date', required=True, default=fields.Date.today())
+    
+    @api.constrains('construction_date')
+    def _constrain_construction_date(self):
+        for record in self: 
+            if record.construction_date > fields.Date.today():
+                raise ValidationError("Construction date cannot be in the future")
+    
+    
     area = fields.Float(string='Area')
     type = fields.Selection([('view_1', 'View 1'), ('view_2', 'View 2')], default ="view_1", string='View Type',) # dropdown
 
