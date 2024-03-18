@@ -1,5 +1,5 @@
-#odoo files
-odoo-17.0
+# python
+venv
 
 # sphinx build directories
 _build/
