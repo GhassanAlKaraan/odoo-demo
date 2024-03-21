@@ -1,13 +1,15 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from odoo.osv.expression import AND, OR
 
 
 class ReelProperty(models.Model):
     # Model name and description
     _name = 'reel.property'
 
-    _sql_constraints = [
-        ('name_unique', 'UNIQUE(name)', 'Property name must be unique!')
+    _sql_constraints = [  # List of tuples
+        ('name_unique', 'UNIQUE(name)', 'Property name must be unique!'),
+        ('area_positive', 'CHECK(area > 0)', 'Property area must be positive')
     ]
 
     # _table = 'gts_reel_property'
@@ -20,7 +22,6 @@ class ReelProperty(models.Model):
 
     landlord_id = fields.Many2one('res.partner', string='Landlord', required=True)
     # Logical fields, computed on the flight, not saved in db
-    # Not stored + ReadOnly
     landlord_phone = fields.Char(related='landlord_id.phone', store=True, readonly=False)
     landlord_email = fields.Char(related='landlord_id.email', store=True, readonly=False)
 
@@ -30,9 +31,7 @@ class ReelProperty(models.Model):
     number_of_properties = fields.Integer(compute="_compute_number_of_properties",
                                           search="_search_number_of_properties")
 
-    def test_search(self):
-        print(self.search([('number_of_properties', '>=', 2)]))
-
+    # No idea what's going on here
     def _search_number_of_properties(self, operator, value):
         property_groups = self.env['reel.property'].read_group([], ['landlord_id', '__count'], ['landlord_id'])
 
@@ -68,7 +67,14 @@ class ReelProperty(models.Model):
             if record.construction_date > fields.Date.today():
                 raise ValidationError("Construction date cannot be in the future")
 
-    area = fields.Float(string='Area')
+    area = fields.Float(string='Area', compute="_compute_area", store=True, readonly=True)
+
+    @api.depends('room_ids.area')
+    def _compute_area(self):
+        for record in self:
+            record.area = sum([room.area for room in record.room_ids])
+            # record.area = sum(record.room_ids.mapped('area')) # alternative
+
     type = fields.Selection([('view_1', 'View 1'), ('view_2', 'View 2')], default="view_1",
                             string='View Type', )  # dropdown
 
@@ -82,17 +88,60 @@ class ReelProperty(models.Model):
                                domain=[('type', 'in', ['bedroom', 'bathroom', 'kitchen'])],
                                limit=3)  # prop 1..1 --> rooms 0..*
 
-    # No need for a new model. We'll use existing model: res.partner
-    # tenant_ids = fields.Many2many('res.partner', string='Tenants') # prop 1..* --> tenants 0..*
-    # investor_ids = fields.Many2many(comodel_name='res.partner', relation='property_investors_rel', column1='property_id', column2='investor_id', string='Investors') # prop 1..* --> investors 0..*
-
     tag_ids = fields.Many2many('reel.tag', string='Tags')
 
-    # @api.onchange('landlord_phone')
-    # def _onchange_landlord_phone(self):
-    #     if not self.landlord_phone:
-    #         raise UserError("Landlord phone is required") # odoo rolls back any changes here
+    street = fields.Char()
+    street2 = fields.Char()
+    zip = fields.Char(change_default=True)
+    city = fields.Char()
+    state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict',
+                               domain="[('country_id', '=?', country_id)]")
+    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
 
-    @api.onchange('landlord_phone')
-    def _onchange_landlord_phone(self):
-        self.name = f"{self.name or ''} {self.landlord_phone or ''}"
+    def test_search(self):
+        print(self.search([('number_of_properties', '>=', 2)]))
+
+    age = fields.Float(compute="_compute_age", store=False)  # Cannot store in db, because it's a dynamic value
+
+    # fields.Date.today() is a dynamic value
+    @api.depends('construction_date')
+    def _compute_age(self):
+        for record in self:
+            record.age = (fields.Date.today() - record.construction_date).days / 365
+
+    def test_search_method(self):
+        # self.method_a()
+
+        domain_c = AND([
+            [('country_id.code', 'in', ['US', 'FR'])],
+            [('zip', '=', 0000)]
+        ])
+        # domain_c = ['&', ('country_id.code', 'in', ['US', 'FR']), ('zip', '=', 0000)]
+        domain_b = ['&', ('name', '=', 'Property 101'), ('age', '>=', 46)]
+        domain_a = [('type', '=', 'view_1')]
+
+        # self.search(
+        # [
+        #     '|',  '|', ('type', '=', 'view_1'),
+        #     '&', ('name', '=', 'Property 101'), ('age', '>=', 46),
+        #     '&', ('country_id.code', 'in', ['US', 'FR']), ('zip', '=', 0000),
+        # ]
+        # )
+        final_domain = OR([domain_a, domain_b, domain_c])
+        self.search(final_domain)
+
+    # def method_a(self):
+    #     print("Language in method A: " + self._context.get('lang'))
+    #     new_self = self.with_context(lang='fr_FR')
+    #     new_self.method_b()
+    #     print("Again in method A: " + self._context.get('lang'))
+    #     print("New self in method A: " + new_self._context.get('lang'))
+    #
+    # def method_b(self):
+    #     print("Language in method B: " + self._context.get('lang'))
+    #     self.method_c()
+    #
+    # def method_c(self):
+    #     print("Language in method C: " + self._context.get('lang'))
+
+    # context is dictionary of useful key-value pairs

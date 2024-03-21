@@ -1,145 +1,204 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
 
-  <!-- Form 1-->
-  <record id="reel_property_form_view" model="ir.ui.view">
-    <field name="name">Reel Property view 1</field>
-    <field name="model">reel.property</field>
-    <field name="priority">16</field>
-    <field name="arch" type="xml">
-      <form>
-        <header>
-          <button name="test_search" string="Test Search" type="object" class="oe_highlight"/>
-        </header>
-        <sheet>
-          <div role="alert" class="alert alert-success">
-            This is rendered through view 1
-          </div>
-          <group>
+    <!-- Form 1-->
+    <record id="reel_property_form_view" model="ir.ui.view">
+        <field name="name">Reel Property view 1</field>
+        <field name="model">reel.property</field>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="test_search" string="Test Search" type="object" class="oe_highlight"/>
+                    <button name="test_search_method" string="Test Search 2" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div role="alert" class="alert alert-success">
+                        This is rendered through view 1
+                    </div>
+                    <group>
 
-            <group string="Property Information">
-              <field name="name"/>
-              
-              <field name="area"/>
-              <field name="type"/>
-            </group>
+                        <group string="Property Information">
+                            <field name="name"/>
 
-            <group string="Lanlord Information">
-              <field name="landlord_id"/>
-              <field name="landlord_phone"/>
-              <field name="landlord_email"/>
-              <field name="landlord_info"/>
-              <field name="number_of_properties" string='Owned Properties'/>
-            </group>
+                            <field name="area"/>
+                            <field name="type"/>
+                        </group>
 
-            <group string="Misc.">
-              <field name="parent_id" domain="[('id', '!=', id)]"/>
-              <field name="construction_date"/>
-            </group>
+                        <group string="Lanlord Information">
+                            <field name="landlord_id"/>
+                            <field name="landlord_phone"/>
+                            <field name="landlord_email"/>
+                            <field name="landlord_info"/>
+                            <field name="number_of_properties" string='Owned Properties'/>
+                        </group>
 
-          </group>
+                        <group string="Misc.">
+                            <field name="parent_id" domain="[('id', '!=', id)]"/>
+                            <field name="construction_date"/>
+                            <field name="age"/>
+                        </group>
 
-          <group  string="Rooms"> <!-- Embedded View-->
-            <field name="room_ids">
-              <tree editable="bottom">
+                        <group string="Address">
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State"
+                                       options="{'no_open': True, 'no_quick_create': True}"
+                                       context="{'default_country_id': country_id}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </div>
+
+                        </group>
+
+                    </group>
+
+                    <group string="Rooms"> <!-- Embedded View-->
+
+                        <field name="room_ids">
+                            <!--                            <tree limit="3" editable="bottom">-->
+                            <tree>
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="property_id" invisible="1"/> <!-- you need it there-->
+                            </tree>
+                        </field>
+                        <!-- <field name="tenant_ids"/>
+                        <field name="investor_ids"/> -->
+                        <group>
+                            <field name='tag_ids'>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="color"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Form 2-->
+    <record id="reel_property_form_view_2" model="ir.ui.view">
+        <field name="name">Reel Property view 2</field>
+        <field name="model">reel.property</field>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div role="alert" class="alert alert-info">
+                        This is rendered through view 2
+                    </div>
+                    <group>
+                        <group string="Column 1">
+                            <field name="name"/>
+                            <field name="area"/>
+                            <field name="type"/>
+                        </group>
+                        <group string="Column 2">
+
+                            <field name="construction_date"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree -->
+    <record id="reel_property_tree_view" model="ir.ui.view">
+        <field name="name">reel.property.tree.view</field>
+        <field name="model">reel.property</field>
+        <field name="arch" type="xml">
+            <tree>
                 <field name="name"/>
+                <field name="construction_date"/>
+                <field name="area"/>
                 <field name="type"/>
-                <field name="property_id" invisible="1"/> <!-- you need it there-->
-              </tree>
-            </field>
-            <!-- <field name="tenant_ids"/>
-            <field name="investor_ids"/> -->
-            <group>
-              <field name='tag_ids'>
-                <tree>
-                  <field name="name"/>
-                  <field name="color"/>
-                </tree>
-              </field>
-            </group>
-          </group>
+            </tree>
+        </field>
+    </record>
 
-        </sheet>
-      </form>
-    </field>
-  </record>
-
-  <!-- Form 2-->
-  <record id="reel_property_form_view_2" model="ir.ui.view">
-    <field name="name">Reel Property view 2</field>
-    <field name="model">reel.property</field>
-    <field name="priority">16</field>
-    <field name="arch" type="xml">
-      <form>
-        <sheet>
-          <div role="alert" class="alert alert-info">
-            This is rendered through view 2
-          </div>
-          <group>
-            <group string="Column 1">
-              <field name="name"/>
-              <field name="area"/>
-              <field name="type"/>
-            </group>
-            <group string="Column 2">
-
-              <field name="construction_date"/>
-            </group>
-          </group>
-
-        </sheet>
-      </form>
-    </field>
-  </record>
-
-  <!-- Tree -->
-  <record id="reel_property_tree_view" model="ir.ui.view">
-    <field name="name">reel.property.tree.view</field>
-    <field name="model">reel.property</field>
-    <field name="arch" type="xml">
-      <tree>
-        <field name="name"/>
-        <field name="construction_date"/>
-        <field name="area"/>
-        <field name="type"/>
-      </tree>
-    </field>
-  </record>
-
-  <!-- Action 1 -->
-  <record id="reel_property_action" model="ir.actions.act_window">
-    <field name="name">Properties</field>
-    <field name="res_model">reel.property</field>
-    <field name="view_mode">tree,form</field>
-    <field name="domain">[('type', '=', 'view_1')]</field>
-    <field name="view_ids" eval="[(5, 0, 0),
+    <!-- Action 1 -->
+    <record id="reel_property_action" model="ir.actions.act_window">
+        <field name="name">Apartments &amp; Houses</field>
+        <field name="res_model">reel.property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">
+            {
+            'test' : 'Hello World',
+            'default_city' : 'Beirut',
+            'default_name' : 'New Apartment',
+            }
+        </field>
+        <field name="domain">[('parent_id', '!=', False)]</field>
+        <!--<field name="domain">[('type', '=', 'view_1')]</field> &lt;!&ndash;Domains are like the WHERE clause&ndash;&gt;-->
+        <!-- view_ids list of tuples to specify used views -->
+        <field name="view_ids" eval="[(5, 0, 0),
                                 (0, 0, {'view_mode': 'tree', 'view_id': ref('reel_property_tree_view')}),
                                 (0, 0, {'view_mode': 'form', 'view_id': ref('reel_property_form_view')})
                                 ]"/>
-  </record>
+    </record>
 
-  <!-- Action 2 -->
-  <record id="reel_property_action_2" model="ir.actions.act_window">
-    <field name="name">Properties 2</field>
-    <field name="res_model">reel.property</field>
-    <field name="view_mode">tree,form</field>
-    <field name="domain">[('type', '=', 'view_2')]</field>
-    <field name="view_ids" eval="[(5, 0, 0),
+    <!-- Action 2 -->
+    <record id="reel_property_action_2" model="ir.actions.act_window">
+        <field name="name">Buildings &amp; Compounds</field>
+        <field name="res_model">reel.property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('parent_id', '=', False)]</field>
+        <field name="context">
+            {
+            'test' : 'Hello World',
+            'default_city' : 'Beirut',
+            'default_name' : 'New Building',
+            }
+        </field>
+        <!--<field name="domain">[('type', '=', 'view_2')]</field>-->
+        <field name="view_ids" eval="[(5, 0, 0),
                                 (0, 0, {'view_mode': 'tree', 'view_id': ref('reel_property_tree_view')}),
                                 (0, 0, {'view_mode': 'form', 'view_id': ref('reel_property_form_view_2')})
                                 ]"/>
-  </record>
+    </record>
 
 
-  <!-- Root -->
-  <!-- <record id="reel_state_root" model="ir.ui.menu">
-    <field name="name">Reel State</field>
-  </record> -->
+    <!-- Root -->
+    <!-- <record id="reel_state_root" model="ir.ui.menu">
+      <field name="name">Reel State</field>
+    </record> -->
 
-  <menuitem id="reel_state_root" name="Reel State" sequence="0" web_icon="reel_state, static/description/icon.png"/>
+    <menuitem id="reel_state_root" name="Reel State" sequence="0" web_icon="reel_state, static/description/icon.png"/>
 
-  <!-- Menu Items -->
-  <menuitem id="reel_property_menu" name="Properties" parent="reel_state_root" sequence="10" action="reel_property_action"/>
-  <menuitem id="reel_property_2_menu" name="Properties 2" parent="reel_state_root" sequence="20" action="reel_property_action_2"/>
+    <!-- Menu Items -->
+    <!--menuitem id="reel_property_menu" name="Properties" parent="reel_state_root" sequence="10"
+              action="reel_property_action"/-->
+    <!--menuitem id="reel_property_2_menu" name="Properties 2" parent="reel_state_root" sequence="20"
+              action="reel_property_action_2"/-->
+
+    <menuitem
+            name="Properties"
+            id="reel_property_menu"
+            sequence="10"
+            parent="reel_state_root">
+        <menuitem
+                id="reel_state_property_building"
+                name="Buildings &amp; Compounds"
+                action="reel_property_action_2"
+                sequence="10"
+        />
+        <menuitem
+                id="reel_state_property_apartment"
+                name="Apartments &amp; Houses"
+                action="reel_property_action"
+                sequence="20"
+        />
+
+    </menuitem>
 
 </odoo>

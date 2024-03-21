@@ -11,6 +11,9 @@ class TestModel(models.Model):
     name = fields.Char()
     age = fields.Integer()
 
+    vendor_id = fields.Many2one('res.partner', string='Vendor')
+    customer_ids = fields.Many2many('res.partner', string='Customer')
+
     def method_a(self):
         return ', '.join(record.name for record in self)
     

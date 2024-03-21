@@ -5,7 +5,7 @@ class Test:
     def class_test_method(self):
         return 'Hello world from class test method'
     
-    @classmethod # ye3ne static method. no need for instance
+    @classmethod # static method
     def class_test_method_2(cls):
         return 'Hello world from class test method 2'
 
