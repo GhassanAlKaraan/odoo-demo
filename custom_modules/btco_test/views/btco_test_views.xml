@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_form" model="ir.ui.view">
+            <field name="name">view_form</field>
+            <field name="model">test.model</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="vendor_id"/>
+                            <field name="customer_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record id="reel_property_tree_view" model="ir.ui.view">
+            <field name="name">btco_test_view_form</field>
+            <field name="model">test.model</field>
+            <field name="arch" type="xml">
+                <tree string="btco_test_form">
+                    <field name="name"/>
+                    <field name="age"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="reel_property_form_view_2" model="ir.ui.view">
+        <field name="name">btco_test_view_form</field>
+        <field name="model">test.model</field>
+        <field name="arch" type="xml">
+            <form string="btco_test_form">
+                <header>
+                    <button type="object" name="test_magic_numbers" string="Test Magic Numbers"/>
+                    <button type="action" name="%(test_wizard_action)d" string="Test Wizard"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="age" attrs="{'readonly': [('name', 'in', ('', False))]}"/>
+                    </group>
+                    <group>
+                        <field name="vendor_id"/>
+                        <field name="customer_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="mobile"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="parent_id" attrs="{'required': [('vendor_id', '!=', False)]}"/>
+                        <field name="child_ids">
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="age"/>
+                                    </group>
+                                    <group>
+                                        <field name="vendor_id"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="vendor_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action" model="ir.actions.act_window">
+        <field name="name">Test</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">test.model</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="test_model_root" name="Test Model" action="test_model_action" sequence="999"/>
+
+</odoo>
