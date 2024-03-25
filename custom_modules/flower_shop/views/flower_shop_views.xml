@@ -49,20 +49,9 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Action to open the flower kanban view -->
-    <record model="ir.actions.act_window" id="action_flower_kanban_view">
-        <field name="name">Flowers</field>
-        <field name="res_model">flower</field>
-        <field name="view_mode">kanban</field>
-    </record>
-
     <!-- Menu item actions -->
     <menuitem id="menu_flower_list_action" name="Flowers" parent="flower_shop_root"
               action="action_flower_list_view"/>
-
-    <menuitem id="menu_flower_kanban_action" name="Flowers" parent="flower_shop_root"
-              action="action_flower_kanban_view"/>
-
 
     <!--Menu Icon-->
     <menuitem id="flower_shop_root" name="Flower Shop" sequence="0"

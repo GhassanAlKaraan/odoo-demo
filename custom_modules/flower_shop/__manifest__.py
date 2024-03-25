@@ -6,7 +6,7 @@
     'description': 'FLOWER SHOP',
     'category': 'Inventory/Inventory',
     'website': 'https://www.odoo.com',
-    'depends': ['base'],
+    'depends': ['base', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'views/flower_shop_views.xml'

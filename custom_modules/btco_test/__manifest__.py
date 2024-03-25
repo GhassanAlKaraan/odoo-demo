@@ -17,7 +17,7 @@
     'application': True,
     'auto_install': False,
     'license': 'LGPL-3',
-    'post_init_hook': '_my_custom_post_method',
-    'pre_init_hook': '_my_custom_pre_method',
-    'uninstall_hook': '_my_custom_uninstall_method',
+    # 'post_init_hook': '_my_custom_post_method',
+    # 'pre_init_hook': '_my_custom_pre_method',
+    # 'uninstall_hook': '_my_custom_uninstall_method',
 }

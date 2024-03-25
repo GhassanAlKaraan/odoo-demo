@@ -13,7 +13,7 @@ class TestModel(models.Model):
     age = fields.Integer()
 
     vendor_id = fields.Many2one('res.partner', string='Vendor')
-    cutomer_ids = fields.Many2many('res.partner', string='Customers')
+    customer_ids = fields.Many2many('res.partner', string='Customers')
 
     parent_id = fields.Many2one('test.model', string='Parent', required=False)
     child_ids = fields.One2many('test.model', 'parent_id', string='Children')
