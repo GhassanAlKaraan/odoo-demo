@@ -35,7 +35,7 @@
         <field name="arch" type="xml">
             <form string="btco_test_form">
                 <header>
-                    <button type="action" name="%(test_wizard_action)d" string="Test Magic Numbers"/>
+                    <button type="action" name="test_magic_numbers" string="Test Magic Numbers"/>
                     <button type="action" name="%(test_wizard_action)d" string="Test Wizard"/>
                 </header>
                 <sheet>

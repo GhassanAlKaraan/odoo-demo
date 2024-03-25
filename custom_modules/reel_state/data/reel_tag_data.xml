@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="residential" model="reel.tag">
+            <field name="name">Residential</field>
+            <field name="color">5</field>
+        </record>
+        <record id="commercial" model="reel.tag">
+            <field name="name">Commercial</field>
+            <field name="color">2</field>
+        </record>
+    </data>
+</odoo>

@@ -9,7 +9,7 @@ class ReelProperty(models.Model):
 
     _sql_constraints = [  # List of tuples
         ('name_unique', 'UNIQUE(name)', 'Property name must be unique!'),
-        ('area_positive', 'CHECK(area > 0)', 'Property area must be positive')
+        # ('area_positive', 'CHECK(area > 0)', 'Property area must be positive')
     ]
 
     # _table = 'gts_reel_property'
@@ -20,7 +20,7 @@ class ReelProperty(models.Model):
     # Python properties translated as SQL fields (Schema properties)
     name = fields.Char('Name', required=True)
 
-    landlord_id = fields.Many2one('res.partner', string='Landlord', required=True)
+    landlord_id = fields.Many2one('res.partner', string='Landlord', required=False)
     # Logical fields, computed on the flight, not saved in db
     landlord_phone = fields.Char(related='landlord_id.phone', store=True, readonly=False)
     landlord_email = fields.Char(related='landlord_id.email', store=True, readonly=False)

@@ -10,7 +10,9 @@
     'data':[
         'security/ir.model.access.csv',
         'views/reel_property_views.xml',
-        'views/reel_room_views.xml'
+        'views/reel_room_views.xml',
+        'data/reel_tag_data.xml',
+        'data/reel_property_data.xml',
         ],
     'installable': True,
     'application': True,
