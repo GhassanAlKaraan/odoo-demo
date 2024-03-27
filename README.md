@@ -14,17 +14,19 @@ c. Create a python venv in C:/Odoo/odoo-17.0, and [install requirements](https:/
 *password = odoo,* \
 *database = PostgreSQL*
 
-I added those credentials to conf/odoo.conf
-
 ## Run the server
+
+Note: You have to fix the paths in the config file, then run a command inside this project's directory:
+
+### Run server in command line
 
 `python C:\Odoo\odoo-17.0\odoo-bin -c .\conf\odoo.conf`
 
-Or run server in shell session:
+### Run server in shell session:
 
 `python C:\Odoo\odoo-17.0\odoo-bin shell -c .\conf\odoo.conf`
 
-Or run **without** the config file:
+### Run without the config file:
 
 `python C:\Odoo\odoo-17.0\odoo-bin -r odoo -w odoo --addons-path=addons,.\custom_modules -d PostgreSQL`
 
@@ -32,4 +34,6 @@ Or run **without** the config file:
 
 Scaffold a module:
 
-`python odoo-bin scaffold scaffolded_module C:\odoo-projects\Odoo\custom_modules`
+`python odoo-bin scaffold scaffolded_module .\custom_modules`
+
+*Happy Coding.*
