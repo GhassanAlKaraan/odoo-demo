@@ -116,6 +116,7 @@ class ReelProperty(models.Model):
             [('country_id.code', 'in', ['US', 'FR'])],
             [('zip', '=', 0000)]
         ])
+        # same as:
         # domain_c = ['&', ('country_id.code', 'in', ['US', 'FR']), ('zip', '=', 0000)]
         domain_b = ['&', ('name', '=', 'Property 101'), ('age', '>=', 46)]
         domain_a = [('type', '=', 'view_1')]
@@ -145,3 +146,5 @@ class ReelProperty(models.Model):
     #     print("Language in method C: " + self._context.get('lang'))
 
     # context is dictionary of useful key-value pairs
+
+

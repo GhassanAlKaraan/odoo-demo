@@ -5,6 +5,31 @@
             <field name="name">Apartment 217</field>
             <field name="construction_date">2009-10-01</field>
             <field name="area">150.0</field>
+
+        </record>
+        <record id="apartment_9905" model="reel.property">
+            <field name="name">Apartment 9905</field>
+            <field name="construction_date">2010-04-24</field>
+            <field name="tag_ids" eval="[(4, ref('reel_state.residential'))]"/>
+        </record>
+
+        <record id="le_mall" model="reel.property">
+            <field name="name">Le Mall</field>
+            <field name="construction_date">2000-01-01</field>
+            <field name="street">Dbayeh Highway</field>
+            <field name="city">Dbayeh</field>
+            <field name="zip">0000</field>
+            <field name="state_id" ref="base.state_ae_du"/>
+            <field name="country_id" ref="base.ae"/>
+            <field name="tag_ids" eval="[
+                (4, ref('reel_state.residential')),
+                (4, ref('reel_state.commercial'))
+            ]"/>
+            <field name="child_ids" eval="[
+                Command.link(ref('reel_state.apartment_217')),
+                Command.link(ref('reel_state.apartment_9905')),
+            ]"/>
+
         </record>
 
     </data>

@@ -76,6 +76,7 @@
                                     <field name="color"/>
                                 </tree>
                             </field> -->
+                            <field name="child_ids"/>
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field' : 'color'}"/>
                         </group>
                     </group>
@@ -161,10 +162,15 @@
             }
         </field>
         <!--<field name="domain">[('type', '=', 'view_2')]</field>-->
-        <field name="view_ids" eval="[(5, 0, 0),
+        <!-- <field name="view_ids" eval="[(5, 0, 0),
                                 (0, 0, {'view_mode': 'tree', 'view_id': ref('reel_property_tree_view')}),
                                 (0, 0, {'view_mode': 'form', 'view_id': ref('reel_property_form_view_2')})
+                                ]"/> -->
+        <field name="view_ids" eval="[(5, 0, 0),
+                                (0, 0, {'view_mode': 'tree', 'view_id': ref('reel_property_tree_view')}),
+                                (0, 0, {'view_mode': 'form', 'view_id': ref('reel_property_form_view')})
                                 ]"/>
+
     </record>
 
 

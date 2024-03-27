@@ -25,8 +25,25 @@ class TestModel(models.Model):
     def method_b(cls):
         return cls._name
 
+    def test_magic_numbers_0(self):
+        # Start of transactions
+        try:
+            test = self.search([])  # works ok inside the same class
+            test = self.env['test.model'].search([])  # works the same, but you specify the class
+            test.write({'name': 'testing transactions'})
+            test_2 = self.create({'name': "testing transactions 2", 'age': 22})
+            test_2.unlink()
+            print(test.name + test['name'])
+            print(', '.join(record.name for record in test))
+            self.env['test.model'].search([])
+        except Exception as e:
+            self.env.cr.rollback()
+            raise e
+        self.env.cr.commit()
+        # End of transactions
+
     def test_magic_numbers(self):
-        #transaction START
+        # transaction START
         records = self.browse([9, 10, 11])
         search_records = self.search([], limit=3, offset=2, sort='age desc')
         records_groups = {}
@@ -38,7 +55,7 @@ class TestModel(models.Model):
 
         return search_records.filtered_domain([('age', '>', 20)])
         pass
-        #try:
+        # try:
         #    test = self.search([])
         #    test.write({'name': "testing transactions"})
         #    test_2 = self.create({'name': "testing transactions 2", 'age': 22})
@@ -46,11 +63,11 @@ class TestModel(models.Model):
         #    print(test.name + test['name'])
         #    print(', '.join(record.name for record in test))
         #    self.env['test.model'].search([])
-        #except Exception as e:
+        # except Exception as e:
         #    self.env.cr.rollback()
         #    raise e
-        #self.env.cr.commit()
-        #transaction END
+        # self.env.cr.commit()
+        # transaction END
 
     # api.model implies that your method is designed to create ONE record at a time
     # @api.model
