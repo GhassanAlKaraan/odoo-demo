@@ -48,8 +48,8 @@ class ReelProperty(models.Model):
             record.landlord_info = f"{record.landlord_id.name} ({record.landlord_phone})"
 
     @api.depends('landlord_id')
-    def _compute_number_of_properties(
-            self):  # the number is dynamic, cant be assigned to a single property, we cant store it
+    def _compute_number_of_properties(self):
+        # the number is dynamic, cant be assigned to a single property, we cant store it
         for record in self:
             record.number_of_properties = self.env['reel.property'].search_count(
                 [('landlord_id', '=', record.landlord_id.id)])
@@ -98,15 +98,15 @@ class ReelProperty(models.Model):
                                domain="[('country_id', '=?', country_id)]")
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
 
+    age = fields.Float(compute="_compute_age", store=False)  # Cannot store in db, because it's a dynamic value
+
     def test_search(self):
         print(self.search([('number_of_properties', '>=', 2)]))
-
-    age = fields.Float(compute="_compute_age", store=False)  # Cannot store in db, because it's a dynamic value
 
     # fields.Date.today() is a dynamic value
     @api.depends('construction_date')
     def _compute_age(self):
-        for record in self:
+        for record in self:  # Do this when it's a computed field. odoo orm way of doing things
             record.age = (fields.Date.today() - record.construction_date).days / 365
 
     def test_search_method(self):
