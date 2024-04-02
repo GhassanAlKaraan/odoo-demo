@@ -22,9 +22,10 @@ Note: You have to fix the paths in the config file, then run a command inside th
 
 `python C:\Odoo\odoo-17.0\odoo-bin -c .\conf\odoo.conf`
 
-### Run server in shell session:
+### Additional Parameters:
 
-`python C:\Odoo\odoo-17.0\odoo-bin shell -c .\conf\odoo.conf`
+Run server in shell: `shell` \
+Dev mode, auto update the XML: `--dev=xml`
 
 ### Run without the config file:
 

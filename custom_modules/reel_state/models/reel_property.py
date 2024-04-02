@@ -32,6 +32,9 @@ class ReelProperty(models.Model):
                                           search="_search_number_of_properties")
 
     # No idea what's going on here
+    def __init__(self, env, ids, prefetch_ids):
+        super().__init__(env, ids, prefetch_ids)
+
     def _search_number_of_properties(self, operator, value):
         property_groups = self.env['reel.property'].read_group([], ['landlord_id', '__count'], ['landlord_id'])
 
@@ -100,6 +103,13 @@ class ReelProperty(models.Model):
 
     age = fields.Float(compute="_compute_age", store=False)  # Cannot store in db, because it's a dynamic value
 
+    room_count = fields.Integer(compute="_compute_room_count", store=False)
+
+    @api.depends('room_ids')
+    def _compute_room_count(self):
+        for record in self:
+            record.room_count = len(record.room_ids)
+
     def test_search(self):
         print(self.search([('number_of_properties', '>=', 2)]))
 
@@ -147,4 +157,21 @@ class ReelProperty(models.Model):
 
     # context is dictionary of useful key-value pairs
 
+    @staticmethod
+    def action_call_python():
+        print("Python Method Button")
 
+    # Only in python you can define dynamic domains
+    # def action_view_rooms(self):
+    #     action = self.env.ref('reel_state.reel_room_action').read()[0]
+    #     action['domain'] = [('property_id', '=', self.ids[0])]  # self.id is not available for some reason
+    #     return action
+
+    def action_view_rooms(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Rooms',
+            'view_mode': 'tree,form',
+            'res_model': 'reel.room',
+            'domain': [('property_id', '=', self.ids[0])]
+        }
