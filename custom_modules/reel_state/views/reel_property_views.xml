@@ -11,26 +11,34 @@
                 <header>
                     <!--<button name="test_search" string="Test Search" type="object" class="oe_highlight"/>-->
                     <!--<button name="test_search_method" string="Test Search 2" type="object" class="oe_highlight"/>-->
-                    <button string="Call Python Method" type="object" name="action_call_python"/>
-                    <!--                    <button string="Call XML Action" name="%(reel_state.reel_property_action)d" type="action"/>-->
-                    <!--                    <button string="Call XML Action" name="%(reel_property_action)d" type="action" attrs="{'invisible' : [('area', '&lt;=', '0')]}"/>-->
-                    <button string="Call XML Action" name="%(reel_property_action)d" type="action"
-                            invisible="area &lt; 200"/>
+                    <!--<button string="Call Python Method" type="object" name="action_call_python"/>-->
+                    <!--<button string="Call XML Action" name="%(reel_property_action)d" type="action" attrs="{'invisible' : [('area', '&lt;=', '0')]}"/>-->
+                    <!--<button string="Call XML Action" name="%(reel_property_action)d" type="action" invisible="area &lt; 200"/>-->
+
+                    <button string="Create Room" type="object" name="action_create_room"/>
+
+                    <button string="Mark as Available" type="object" name="action_available"
+                            invisible="status == 'available'"/>
+                    <button string="Mark as Rented" type="object" name="action_rented" invisible="status == 'rented'"/>
+                    <button string="Mark as Maintenance" type="object" name="action_maintenance"
+                            invisible="status == 'maintenance'"/>
+
+                    <field name="status" widget="statusbar" statusbar_visible="available,rented"
+                           options="{'clickable' : '1'}"/>
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" title="Rented" invisible="status !='rented'" bg_color="text-bg-success"/>
                     <div class="oe_button_box">
-                        <!--                        <button name="%(reel_property_action)d" type="action" icon="fa-building" class="oe_stat_button">-->
-                        <!--                           XML Action-->
-                        <!--                        </button>-->
+                        <!--<button name="%(reel_property_action)d" type="action" icon="fa-building" class="oe_stat_button">-->
+                        <!--XML Action-->
+                        <!--</button>-->
                         <button name="action_view_rooms" type="object" class="oe_stat_button" icon="fa-building"
-                                invisible="room_count = 0"> <!--attrs="{ 'invisible' : [ ( 'room_count', '=', 0 ) ] }"-->
-
-
+                                invisible="room_count == 0">
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_value">
                                     <field name="room_count"/>
                                 </span>
-                                <span class="o_stat_text">Rooms</span>
+                                <span class="o_stat_text">&#32;Rooms</span>
                             </div>
                         </button>
                         <!--                        <button name="%(reel_room_action)d" type="action" class="oe_stat_button" icon="fa-building">-->
@@ -50,9 +58,11 @@
 
                         <group string="Property Information">
                             <field name="name"/>
-
                             <field name="area"/>
                             <field name="type"/>
+                            <field name="rental_percentage" widget="percentage"/>
+                            <field name="rental_average_hours" widget="float_time"/>
+
                         </group>
 
                         <group string="Lanlord Information">
@@ -107,11 +117,12 @@
                                 </tree>
                             </field> -->
                             <!--<field name="child_ids" attrs="{'invisible': [('parent_id', '!=', False)]}"/>-->
-                            <field name="child_ids" invisible="parent_id"/>
-                            <tree>
-                                <field name="name"/>
-                                <field name="construction_date"/>
-                            </tree>
+                            <field name="child_ids" invisible="parent_id">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="construction_date"/>
+                                </tree>
+                            </field>
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field' : 'color'}"/>
                         </group>
                     </group>

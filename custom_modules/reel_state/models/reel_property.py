@@ -12,6 +12,9 @@ class ReelProperty(models.Model):
         # ('area_positive', 'CHECK(area > 0)', 'Property area must be positive')
     ]
 
+    rental_percentage = fields.Float(string='Rental Percentage', default=0.0)
+    rental_average_hours = fields.Float(string='Rental Average Hours', default=0.0)
+
     # _table = 'gts_reel_property'
     _description = 'Reel Property'
     _rec_name = 'name'
@@ -105,6 +108,15 @@ class ReelProperty(models.Model):
 
     room_count = fields.Integer(compute="_compute_room_count", store=False)
 
+    status = fields.Selection(
+        [
+            ('available', 'Available'),
+            ('rented', 'Rented'),
+            ('maintenance', 'Maintenance'),
+
+        ], default='available', string='Status'
+    )
+
     @api.depends('room_ids')
     def _compute_room_count(self):
         for record in self:
@@ -173,5 +185,31 @@ class ReelProperty(models.Model):
             'name': 'Rooms',
             'view_mode': 'tree,form',
             'res_model': 'reel.room',
-            'domain': [('property_id', '=', self.ids[0])]
+            'domain': [('property_id', '=', self.ids[0])],
+            'context': {
+                'create': 0,
+                'edit': 0,
+                'delete': 0
+            }
         }
+
+    def action_create_room(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Create Room',
+            'view_mode': 'tree,form',
+            'res_model': 'reel.room',
+            'domain': [('property_id', '=', self.ids[0])],
+            'context': {
+                'default_property_id': self.ids[0]
+            }
+        }
+
+    def action_available(self):
+        self.write({'status': 'available'})
+
+    def action_rented(self):
+        self.write({'status': 'rented'})
+
+    def action_maintenance(self):
+        self.write({'status': 'maintenance'})
