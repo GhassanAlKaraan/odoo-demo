@@ -7,7 +7,7 @@
     'category': 'Accounting/Accounting',
     'website': 'https://www.odoo.com/app/invoicing',
     'depends': ['base'],
-    'data':[
+    'data': [
         'security/ir.model.access.csv',
         'wizards/test_wizard_views.xml',
         'views/btco_test_views.xml',

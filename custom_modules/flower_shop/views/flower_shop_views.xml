@@ -2,9 +2,9 @@
 <odoo>
 
     <!--Form-->
-    <record id="flower_view" model="ir.ui.view">
-        <field name="name">flower.form.view</field>
-        <field name="model">flower</field>
+    <record id="flower_form_view" model="ir.ui.view">
+        <field name="name">flower_shop.flower.form.view</field>
+        <field name="model">flower_shop.flower</field>
         <field name="priority">16</field>
         <field name="arch" type="xml">
             <form>
@@ -29,8 +29,8 @@
 
     <!--Tree-->
     <record id="flower_shop_tree_view" model="ir.ui.view">
-        <field name="name">flower.tree.view</field>
-        <field name="model">flower</field>
+        <field name="name">flower_shop.flower.tree.view</field>
+        <field name="model">flower_shop.flower</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="common_name"/>
@@ -45,7 +45,7 @@
     <!-- Action to open the flower list view -->
     <record model="ir.actions.act_window" id="action_flower_list_view">
         <field name="name">Flowers</field>
-        <field name="res_model">flower</field>
+        <field name="res_model">flower_shop.flower</field>
         <field name="view_mode">tree,form</field>
     </record>
 

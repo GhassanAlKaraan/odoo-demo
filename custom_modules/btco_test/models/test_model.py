@@ -61,15 +61,17 @@ class TestModel(models.Model):
     # api.model implies that your method is designed to create MORE THAN ONE record at a time
     @api.model_create_multi
     def create(self, vals_list):  # You're overriding the existing method create
-        for vals in vals_list:
-            if 'parent_id' in vals_list:
-                print('This record has a parent')
-        return super(TestModel, self).create(vals_list)
+        # for vals in vals_list:
+        #     if 'parent_id' in vals_list:
+        #         print('This record has a parent')
+        # return super(TestModel, self).create(vals_list)
+        raise UserError("No No No")
 
     def write(self, vals):
-        if 'parent_id' in vals:
-            print("This record has a parent")
-        return super().write(vals)
+        # if 'parent_id' in vals:
+        #     print("This record has a parent")
+        # return super().write(vals)
+        raise UserError("No No No")
 
     def unlink(self):
         res = super().unlink()

@@ -3,12 +3,9 @@ from odoo.exceptions import ValidationError
 
 
 class Flower(models.Model):
-    _name = 'flower'
+    _name = 'flower_shop.flower'
     _description = 'Flower'
     _rec_name = 'common_name'  # display name of choice
-
-    # relation to product
-    # _inherit = 'product.product'
 
     # names
     common_name = fields.Char('Name', required=True)
@@ -18,6 +15,7 @@ class Flower(models.Model):
     season_start_date = fields.Date('Season Start Date', required=True)
     season_end_date = fields.Date('Season End Date', required=True)
 
+    # control the season dates
     @api.constrains('season_start_date', 'season_end_date')
     def _check_season_dates(self):  # dates constraints
         for record in self:
@@ -28,3 +26,4 @@ class Flower(models.Model):
     # watering
     watering_frequency = fields.Integer('Watering Frequency', required=True)  # once every __ days
     watering_amount = fields.Float('Watering Amount', required=True)  # amount of water in milliliters
+
