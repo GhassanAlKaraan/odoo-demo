@@ -6,10 +6,6 @@
         <field name="priority">16</field>
         <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
-
-            <!--            <xpath expr="//div[@name='purchase_ok']" position="after">-->
-            <!--                <field name="is_a_flower" widget="boolean">Is it a Flower?</field>-->
-            <!--            </xpath>-->
             <xpath expr="//div[@name='options']" position="inside">
                 <span class="d-inline-block">
                     <field name="is_a_flower" widget="boolean"/>
@@ -18,7 +14,7 @@
             </xpath>
 
             <xpath expr="//field[@name='categ_id']" position="after">
-                <field name="flower_id">Flower ID</field>
+                <field name="flower_id"/>
             </xpath>
 
         </field>
@@ -28,16 +24,18 @@
     <record id="flower_product_action" model="ir.actions.act_window">
         <field name="name">Flowers</field>
         <field name="res_model">product.product</field>
-<!--        <field name="view_mode">tree,form</field>-->
-        <field name="view_mode">kanban,tree,form,activity</field>
-        <field name="domain" eval="[('default_is_a_flower', '=', True)]"/>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" eval="[('is_a_flower', '=', True)]"/>
         <field name="context" eval="{ 'default_is_a_flower' : True }"/>
-<!--        <field name="view_ids" eval="[(5, 0, 0),-->
-<!--                                (0, 0, {'view_mode': 'tree', 'view_id': ref('product.product_product_tree_view')}),-->
-<!--                                (0, 0, {'view_mode': 'form', 'view_id': ref('flower_shop_product_view')})-->
-<!--                                ]"/>-->
+        <field name="view_ids" eval="[(5, 0, 0),
+                                (0, 0, {'view_mode': 'tree', 'view_id': ref('product.product_product_tree_view')}),
+                                (0, 0, {'view_mode': 'form', 'view_id': ref('flower_shop_product_view')})
+                                ]"/>
+
+
     </record>
 
+    <!-- Menu Item -->
     <menuitem id="flower_product_menu" action="flower_product_action" parent="sale.product_menu_catalog"
               sequence="1"/>
 </odoo>
