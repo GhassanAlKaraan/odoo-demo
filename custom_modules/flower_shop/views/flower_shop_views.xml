@@ -41,7 +41,6 @@
         </field>
     </record>
 
-
     <!-- Action to open the flower list view -->
     <record model="ir.actions.act_window" id="action_flower_list_view">
         <field name="name">Flowers</field>
