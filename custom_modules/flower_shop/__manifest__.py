@@ -6,11 +6,12 @@
     'description': 'FLOWER SHOP',
     'category': 'Inventory/Inventory',
     'website': 'https://www.odoo.com',
-    'depends': ['base', 'product', 'sale'],  # sale --> product --> product variant
+    'depends': ['base', 'product', 'sale', 'stock'],  # sale --> product --> product variant
     'data': [
-        'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',
         'views/flower_shop_views.xml',
         'views/product_views.xml',
+        'views/stock_production_lot_views.xml',
     ],
     'installable': True,
     'application': True,
