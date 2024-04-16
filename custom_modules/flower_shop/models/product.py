@@ -4,8 +4,7 @@ from odoo import models, fields
 class Product(models.Model):
     #
     #
-    #
-    # _name = 'flower_shop.product' # Why not working???
+    # extend a new model, I don't want to create a new one.
     _name = 'product.product'
     _description = 'Flower Shop Product'
     _inherit = 'product.product'   # sale --> product --> product variant

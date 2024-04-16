@@ -10,4 +10,6 @@ class FlowerWater(models.Model):
 
     # Which flower is this?
     # You can have many watering instances of me
-    serial_number = fields.Many2one("stock.production.lot")
+    serial_number = fields.Many2one("stock.lot", string="Serial Number")
+
+    date = fields.Date("Watering Date", required=True, default=fields.Date.context_today)
