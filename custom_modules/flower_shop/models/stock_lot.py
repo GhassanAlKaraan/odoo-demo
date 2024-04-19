@@ -31,6 +31,8 @@ class StockLot(models.Model):
                 last_watering = max(lot.flower_water_ids.mapped('date'))
                 if (fields.Date.today() - last_watering).days >= lot.product_id.flower_id.watering_frequency:
                     self.env['flower_shop.flower.water'].create({'serial_number': lot.id})
+                else:
+                    raise ValidationError("Wait a bit longer before watering again.")
             else:
                 self.env['flower_shop.flower.water'].create({'serial_number': lot.id})
 
@@ -57,10 +59,22 @@ class StockLot(models.Model):
     #                 'serial_number': record.id,
     #             })
 
-    @api.constrains('flower_water_ids')
-    def _check_watering_frequency(self):
-        for record in self:
-            if record.flower_water_ids:
-                last_watering = max(record.flower_water_ids.mapped('date'))
-                if (fields.Date.today() - last_watering).days < record.product_id.flower_id.watering_frequency:
-                    raise ValidationError("Wait a bit longer before watering again.")
+    # @api.constrains('flower_water_ids')
+    # def _check_watering_frequency(self):
+    #     for record in self:
+    #         if record.flower_water_ids:
+    #             last_watering = max(record.flower_water_ids.mapped('date'))
+    #             if (fields.Date.today() - last_watering).days < record.product_id.flower_id.watering_frequency:
+    #                 raise ValidationError("Wait a bit longer before watering again.")
+
+    def action_open_watering_times(self):
+        self.ensure_one()  # Ensure that the method is called on a single record
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Water Records',
+            'view_mode': 'tree,form',
+            'res_model': 'flower_shop.flower.water',
+            'domain': [('serial_number', '=', self.ids[0])],
+            'context': {'default_serial_number': self.ids[0]},
+            'target': 'current',
+        }

@@ -29,8 +29,4 @@ class Flower(models.Model):
 
     # api.depends ?
     def name_get(self):
-        result = []
-        for record in self:
-            name = '{} ({})'.format(record.scientific_name, record.common_name)
-            result.append((record.id, name))
-        return result
+        return [(flower.id, "{} ({})".format(flower.scientific_name, flower.common_name)) for flower in self]

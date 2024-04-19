@@ -29,18 +29,18 @@
     </record>
 
     <!-- Action -->
-    <record id="flower_shop_stock_action" model="ir.actions.act_window">
-        <field name="name">Stocks</field>
-        <field name="model">stock.production.lot</field>
-        <field name="view_mode">tree, form</field>
-        <field name="view_ids" eval="[(5, 0, 0),
-                                      (0, 0, {'view_mode': 'tree'}),
-                                      (0, 0, {'view_mode': 'form', 'view_id': ref('flower_shop_stock_production_lot_form_view')})]"/>
-    </record>
+<!--    <record id="flower_shop_stock_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Stocks</field>-->
+<!--        <field name="model">stock.lot</field>-->
+<!--        <field name="view_mode">tree, form</field>-->
+<!--        <field name="view_ids" eval="[(5, 0, 0),-->
+<!--                                      (0, 0, {'view_mode': 'tree'}),-->
+<!--                                      (0, 0, {'view_mode': 'form', 'view_id': ref('flower_shop_stock_production_lot_form_view')})]"/>-->
+<!--    </record>-->
 
     <!-- Menu Item -->
-    <menuitem id="flower_shop_stock_menu"
-              name="Stocks Menu"
-              action="flower_shop_stock_action"
-              sequence="20"/>
+<!--    <menuitem id="flower_shop_stock_menu"-->
+<!--              name="Stocks Menu"-->
+<!--              action="flower_shop_stock_action"-->
+<!--              sequence="20"/>-->
 </odoo>

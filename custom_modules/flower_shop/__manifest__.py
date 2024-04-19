@@ -12,7 +12,7 @@
         'views/flower_shop_views.xml',
         'views/product_views.xml',
         'views/stock_lot_views.xml',
-        'website_sale_flower_views.xml'
+        # 'views/website_sale_flower_views.xml'
     ],
     'installable': True,
     'application': True,
