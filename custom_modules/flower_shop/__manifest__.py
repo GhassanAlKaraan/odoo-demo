@@ -9,7 +9,6 @@
     'depends': ['base', 'product', 'sale', 'stock', ],  # sale --> product --> product variant
     'data': [
         'security/ir.model.access.csv',
-        'data/server_action.xml',
         'views/flower_shop_views.xml',
         'views/product_views.xml',
         'views/stock_lot_views.xml',

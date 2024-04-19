@@ -20,7 +20,7 @@ class StockLot(models.Model):
         string='Is a Flower?'
     )
 
-    @api.depends('product_id')
+    @api.depends('product_id.is_a_flower')
     def _compute_is_a_flower(self):
         for lot in self:
             lot.is_a_flower = lot.product_id.is_a_flower

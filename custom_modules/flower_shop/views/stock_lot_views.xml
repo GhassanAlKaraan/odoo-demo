@@ -9,7 +9,7 @@
             <xpath expr="//sheet" position="before">
                 <header>
                     <field name="is_a_flower" invisible="1"/>
-                    <button string="Flower water" type="object" name="action_flower_water" class="oe_highlight" />
+                    <button string="Flower water" type="object" name="action_flower_water" class="oe_highlight"
                     invisible="is_a_flower == False"/>
                 </header>
             </xpath>
