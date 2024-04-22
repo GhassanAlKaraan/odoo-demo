@@ -27,6 +27,6 @@ class Flower(models.Model):
     watering_frequency = fields.Integer('Watering Frequency', required=True)  # once every __ days
     watering_amount = fields.Float('Watering Amount', required=True)  # amount of water in milliliters
 
-    # api.depends ?
+    # Display Name
     def name_get(self):
         return [(flower.id, "{} ({})".format(flower.scientific_name, flower.common_name)) for flower in self]

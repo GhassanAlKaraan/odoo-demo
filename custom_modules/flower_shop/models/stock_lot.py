@@ -36,36 +36,13 @@ class StockLot(models.Model):
             else:
                 self.env['flower_shop.flower.water'].create({'serial_number': lot.id})
 
-    # def action_flower_water(self):
-    #     # Filter out the records where is_a_flower is True
-    #     flowers = self.filtered(lambda rec: rec.is_a_flower)
-    #
-    #     for record in flowers:
-    #         # Water_ids is sorted such that the most recent watering record is first
-    #         if record.water_ids:
-    #             last_watered_date = record.water_ids[0].date
-    #             frequency = record.product_id.flower_id.watering_frequency
-    #             today_date = fields.Date.today()
-    #
-    #             # Calculate the difference in days between today and the last watered date
-    #             if (today_date - last_watered_date).days >= frequency:
-    #                 # If it's time to water again
-    #                 self.env['flower_shop.flower.water'].create({
-    #                     'serial_number': record.id,
-    #                 })
-    #         else:
-    #             # If there are no watering records, we assume it needs watering
-    #             self.env['flower_shop.flower.water'].create({
-    #                 'serial_number': record.id,
-    #             })
-
-    # @api.constrains('flower_water_ids')
-    # def _check_watering_frequency(self):
-    #     for record in self:
-    #         if record.flower_water_ids:
-    #             last_watering = max(record.flower_water_ids.mapped('date'))
-    #             if (fields.Date.today() - last_watering).days < record.product_id.flower_id.watering_frequency:
-    #                 raise ValidationError("Wait a bit longer before watering again.")
+    @api.constrains('flower_water_ids')
+    def _check_watering_frequency(self):
+        for record in self:
+            if record.flower_water_ids:
+                last_watering = max(record.flower_water_ids.mapped('date'))
+                if (fields.Date.today() - last_watering).days < record.product_id.flower_id.watering_frequency:
+                    raise ValidationError("Wait a bit longer before watering again.")
 
     def action_open_watering_times(self):
         self.ensure_one()  # Ensure that the method is called on a single record
