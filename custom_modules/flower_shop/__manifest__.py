@@ -8,10 +8,12 @@
     'website': 'https://www.odoo.com',
     'depends': ['base', 'product', 'sale', 'stock', ],  # sale --> product --> product variant
     'data': [
+
         'security/ir.model.access.csv',
         'views/flower_shop_views.xml',
         'views/product_views.xml',
         'views/stock_lot_views.xml',
+        'data/ir_actions_server_data.xml'
         # 'views/website_sale_flower_views.xml'
     ],
     'installable': True,
