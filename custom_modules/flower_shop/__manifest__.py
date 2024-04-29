@@ -14,6 +14,8 @@
         'views/product_views.xml',
         'views/stock_lot_views.xml',
         'data/ir_actions_server_data.xml',
+        'data/groups.xml',
+        'data/ir_cron_scheduled_actions.xml',
         'reports/flower_sale_order_views.xml',
         'reports/paper_format.xml',
         'reports/action.xml',

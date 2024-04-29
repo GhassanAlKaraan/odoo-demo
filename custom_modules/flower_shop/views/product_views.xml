@@ -7,10 +7,18 @@
         <field name="priority">16</field>
         <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="needs_watering" invisible="1"/>
+                <widget name="web_ribbon" title="NEEDS WATERING" bg_color="text-bg-danger" invisible="needs_watering == False"/>
+            </xpath>
             <xpath expr="//div[@name='options']" position="inside">
                 <span class="d-inline-block">
                     <field name="is_a_flower" widget="boolean"/>
                     <label for="is_a_flower"/>
+
+                    <!-- Temporary-->
+                    <!--<field name="needs_watering" widget="boolean" invisible="needs_watering == False"/>-->
+                    <!--<label for="needs_watering"/>-->
                 </span>
             </xpath>
 
@@ -32,6 +40,7 @@
                     parent.company_id), ('is_a_flower', '=', True)]
                 </attribute>
             </xpath>
+
 
         </field>
     </record>

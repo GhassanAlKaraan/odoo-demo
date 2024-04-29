@@ -1,5 +1,5 @@
 from odoo import fields, models, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, AccessError
 
 
 class StockLot(models.Model):
@@ -26,6 +26,11 @@ class StockLot(models.Model):
             lot.is_a_flower = lot.product_id.is_a_flower
 
     def action_flower_water(self):
+
+        # Only for Gardeners
+        if not self.env.user.has_group('flower_shop.group_gardeners'):
+            raise AccessError("Only users with the gardener group can water the plants.")
+
         for lot in self.filtered('is_a_flower'):
             if lot.flower_water_ids:
                 last_watering = max(lot.flower_water_ids.mapped('date'))
