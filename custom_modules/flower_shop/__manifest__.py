@@ -16,6 +16,8 @@
         'data/ir_actions_server_data.xml',
         'data/groups.xml',
         'data/ir_cron_scheduled_actions.xml',
+        'data/global_rules.xml',
+        'data/group_rules.xml',
         'reports/flower_sale_order_views.xml',
         'reports/paper_format.xml',
         'reports/action.xml',

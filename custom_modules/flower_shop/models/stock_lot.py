@@ -60,3 +60,11 @@ class StockLot(models.Model):
             'context': {'default_serial_number': self.ids[0]},
             'target': 'current',
         }
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            product = self.env["product.product"].browse(vals["product_id"])
+            if product.sequence_id:
+                vals["name"] = product.sequence_id.next_by_id()
+        return super().create(vals_list)

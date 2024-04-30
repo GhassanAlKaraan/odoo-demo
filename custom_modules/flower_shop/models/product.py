@@ -1,9 +1,8 @@
 from odoo import models, fields, api
 from collections import defaultdict
 
+
 class Product(models.Model):
-    #
-    #
     # extend a new model, I don't want to create a new one.
     _name = 'product.product'
     _description = 'Flower Shop Product'
@@ -13,9 +12,7 @@ class Product(models.Model):
     #
     #
     is_a_flower = fields.Boolean(string='Is a Flower?')
-    #
-    #
-    #
+
     # needs_watering = fields.Boolean(compute='_compute_needs_watering', string='Needs Watering?')
     #
     # @api.depends('flower_id')
@@ -31,9 +28,7 @@ class Product(models.Model):
     #                         needs_water = True
     #                         break
     #         product.needs_watering = needs_water
-    #
-    #
-    #
+
     needs_watering = fields.Boolean(string='Needs Watering', default=False)
 
     def action_needs_watering(self):
@@ -54,3 +49,14 @@ class Product(models.Model):
 
         for flower in flowers:
             flower.needs_watering = lot_vals[flower.id]
+
+    sequence_id = fields.Many2one("ir.sequence", "Flower Sequence")
+
+    #
+    gardener_ids = fields.Many2many(
+        comodel_name='res.users',
+        relation='product_gardener_rel',
+        column1='product_id',
+        column2='user_id',
+        string='Gardeners'
+    )
