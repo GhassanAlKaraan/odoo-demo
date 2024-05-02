@@ -2,7 +2,7 @@
 <odoo>
     <record id="action_report_flower_sale_order" model="ir.actions.report">
         <field name="name">Flower Sale Order Booklet</field>
-        <field name="report_name">report_flower_sale_order</field>
+        <field name="report_name">flower_shop.report_flower_sale_order</field>
         <field name="report_type">qweb-pdf</field>
         <field name="model">sale.order</field>
         <field name="binding_model_id" ref="sale.model_sale_order"/>

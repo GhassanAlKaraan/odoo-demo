@@ -6,7 +6,7 @@
     'description': 'FLOWER SHOP',
     'category': 'Inventory/Inventory',
     'website': 'https://www.odoo.com',
-    'depends': ['base', 'product', 'sale', 'stock'],
+    'depends': ['base', 'product', 'sale', 'stock', 'contacts'],
     'data': [
 
         'security/ir.model.access.csv',
@@ -18,6 +18,7 @@
         'data/ir_cron_scheduled_actions.xml',
         'data/global_rules.xml',
         'data/group_rules.xml',
+        'data/parameters.xml',
         'reports/flower_sale_order_views.xml',
         'reports/paper_format.xml',
         'reports/action.xml',
