@@ -2,19 +2,40 @@
 <odoo>
     <template id="product_flower_details" inherit_id="website_sale.product">
         <xpath expr="//section[@id='product_detail']" position="inside">
-            <div t-if="product.is_a_flower and product.flower_id" class="mt-3">
+            <!-- Check if the product is marked as a flower and has flower details -->
+            <div t-if="product.product_variant_id.is_a_flower and product.product_variant_id.flower_id" class="mt-3">
                 <h5>Flower Details</h5>
                 <ul class="list-unstyled">
-                    <li><strong>Scientific Name:</strong> <span t-field="product.flower_id.scientific_name"/></li>
+                    <li><strong>Scientific Name:</strong> <span t-field="product.product_variant_id.flower_id.scientific_name"/></li>
                     <li><strong>Season:</strong>
-                        <span t-field="product.flower_id.season_start_date"/>
+                        <span t-field="product.product_variant_id.flower_id.season_start_date"/>
                         to
-                        <span t-field="product.flower_id.season_end_date"/>
+                        <span t-field="product.product_variant_id.flower_id.season_end_date"/>
                     </li>
-                    <li><strong>Watering Frequency:</strong> Every <span t-field="product.flower_id.watering_frequency"/> days</li>
-                    <li><strong>Watering Amount:</strong> <span t-field="product.flower_id.watering_amount"/> ml</li>
+                    <li><strong>Watering Frequency:</strong> Every <span t-field="product.product_variant_id.flower_id.watering_frequency"/> days</li>
+                    <li><strong>Watering Amount:</strong> <span t-field="product.product_variant_id.flower_id.watering_amount"/> ml</li>
                 </ul>
             </div>
         </xpath>
     </template>
 </odoo>
+
+<!--<odoo>-->
+<!--    <template id="product_flower_details" inherit_id="website_sale.product">-->
+<!--        <xpath expr="//section[@id='product_detail']" position="inside">-->
+<!--            <div t-if="product.is_a_flower and product.flower_id" class="mt-3">-->
+<!--                <h5>Flower Details</h5>-->
+<!--                <ul class="list-unstyled">-->
+<!--                    <li><strong>Scientific Name:</strong> <span t-field="product.flower_id.scientific_name"/></li>-->
+<!--                    <li><strong>Season:</strong>-->
+<!--                        <span t-field="product.flower_id.season_start_date"/>-->
+<!--                        to-->
+<!--                        <span t-field="product.flower_id.season_end_date"/>-->
+<!--                    </li>-->
+<!--                    <li><strong>Watering Frequency:</strong> Every <span t-field="product.flower_id.watering_frequency"/> days</li>-->
+<!--                    <li><strong>Watering Amount:</strong> <span t-field="product.flower_id.watering_amount"/> ml</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+<!--</odoo>-->
