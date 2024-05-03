@@ -76,9 +76,58 @@ class StockWarehouse(models.Model):
             warehouse.fetch_weather(show_error=False)
 
     # 4
+    # def get_forecast_all_warehouses(self, show_error=True):
+    #     flower_serials_to_water = self.env["stock.lot"]
+    #     for warehouse in self.search([]):  # Assuming you want to run this for all warehouses
+    #         api_key, lat, lon = warehouse.get_api_key_and_location(show_error)
+    #         if not api_key or not lat or not lon:
+    #             continue  # Skip this warehouse if the API key or location data is missing
+    #
+    #         url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}"
+    #         try:
+    #             response = requests.get(url, timeout=10)
+    #             response.raise_for_status()  # Check for HTTP errors
+    #             entries = response.json()
+    #             is_rainy_today = False
+    #
+    #             # Check only the first 4 items in the list from 9 AM to 6 PM
+    #             for entry in entries['list'][:4]:
+    #                 rain = entry.get("rain", {}).get("3h", 0)
+    #                 if rain > 0.2:
+    #                     is_rainy_today = True
+    #                     break
+    #
+    #             if is_rainy_today:
+    #                 flower_products = self.env["product.product"].search([("is_flower", "=", True)])
+    #                 quants = self.env["stock.quant"].search([
+    #                     ("product_id", "in", flower_products.ids),
+    #                     ("location_id", "=", warehouse.lot_stock_id.id)
+    #                 ])
+    #                 flower_serials_to_water |= quants.mapped('lot_id')
+    #
+    #         except requests.HTTPError as e:
+    #             _logger.error(f"HTTP Error for warehouse {warehouse.name}: {e}")
+    #             if show_error:
+    #                 raise UserError(f"HTTP Error for warehouse {warehouse.name}: {e}")
+    #         except requests.RequestException as e:
+    #             _logger.error(f"Request Error for warehouse {warehouse.name}: {e}")
+    #             if show_error:
+    #                 raise UserError(f"Request Error for warehouse {warehouse.name}: {e}")
+    #         except Exception as e:
+    #             _logger.error(f"Unexpected error for warehouse {warehouse.name}: {e}")
+    #             if show_error:
+    #                 raise UserError(f"Unexpected error for warehouse {warehouse.name}: {e}")
+    #
+    #     # Watering the flowers
+    #     for flower_serial in flower_serials_to_water:
+    #         self.env["flower_shop.flower.water"].create({
+    #             "serial_id": flower_serial.id,
+    #         })
+
+    # 4
     def get_forecast_all_warehouses(self, show_error=True):
         flower_serials_to_water = self.env["stock.lot"]
-        for warehouse in self.search([]):  # Assuming you want to run this for all warehouses
+        for warehouse in self.search([]):  # Run this for all warehouses
             api_key, lat, lon = warehouse.get_api_key_and_location(show_error)
             if not api_key or not lat or not lon:
                 continue  # Skip this warehouse if the API key or location data is missing
@@ -90,12 +139,15 @@ class StockWarehouse(models.Model):
                 entries = response.json()
                 is_rainy_today = False
 
-                # Check only the first 4 items in the list from 9 AM to 6 PM
-                for entry in entries['list'][:4]:
-                    rain = entry.get("rain", {}).get("3h", 0)
-                    if rain > 0.2:
-                        is_rainy_today = True
-                        break
+                # Check for rain in the correct time intervals
+                for entry in entries['list']:
+                    forecast_time = fields.Datetime.from_string(entry['dt_txt'])
+                    # Ensure the forecast time is between 9 AM to 6 PM
+                    if 9 <= forecast_time.hour < 18:
+                        rain = entry.get("rain", {}).get("3h", 0)
+                        if rain > 0.2:
+                            is_rainy_today = True
+                            break
 
                 if is_rainy_today:
                     flower_products = self.env["product.product"].search([("is_flower", "=", True)])
