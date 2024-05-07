@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from collections import defaultdict
+from datetime import datetime
 
 
 class Product(models.Model):
@@ -10,6 +11,13 @@ class Product(models.Model):
     is_a_flower = fields.Boolean(string='Is a Flower?')
 
     needs_watering = fields.Boolean(string='Needs Watering', default=False)
+
+    # this function just solves an error at creation: ensures that write_date is always a datetime object
+    def _compute_write_date(self):
+        for record in self:
+            product_write_date = record.write_date if record.write_date else datetime.min
+            template_write_date = record.product_tmpl_id.write_date if record.product_tmpl_id.write_date else datetime.min
+            record.write_date = max(product_write_date, template_write_date)
 
     def action_needs_watering(self):
         today = fields.Date.today()

@@ -13,18 +13,3 @@
         </record>
     </data>
 </odoo>
-
-<!--<odoo>-->
-<!--    <data noupdate="1">-->
-<!--        <record id="flower_product_access_rule" model="ir.rule">-->
-<!--            <field name="name">Flower Product Access for Gardeners</field>-->
-<!--            <field name="model_id" ref="product.model_product_product"/>-->
-<!--            <field name="groups" eval="[(4, ref('flower_shop.group_gardener'))]"/>-->
-<!--            <field name="domain_force">['|', ('gardener_ids', '=', False), ('gardener_ids', 'in', user.id)]</field>-->
-<!--            <field name="perm_read" eval="True"/>-->
-<!--            <field name="perm_write" eval="True"/>-->
-<!--            <field name="perm_create" eval="True"/>-->
-<!--            <field name="perm_unlink" eval="True"/>-->
-<!--        </record>-->
-<!--    </data>-->
-<!--</odoo>-->

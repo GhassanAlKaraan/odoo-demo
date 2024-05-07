@@ -56,12 +56,11 @@
                                 (0, 0, {'view_mode': 'tree', 'view_id': ref('product.product_product_tree_view')}),
                                 (0, 0, {'view_mode': 'form', 'view_id': ref('flower_shop_product_view')})
                                 ]"/>
-
-
     </record>
 
     <!-- Menu Item -->
     <menuitem id="flower_product_menu" action="flower_product_action" parent="sale.product_menu_catalog"
               sequence="1"/>
+
 </odoo>
 
