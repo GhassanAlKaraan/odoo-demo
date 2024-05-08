@@ -15,15 +15,15 @@
                 <span class="d-inline-block">
                     <field name="is_a_flower" widget="boolean"/>
                     <label for="is_a_flower"/>
-
-                    <!-- Temporary-->
-                    <!--<field name="needs_watering" widget="boolean" invisible="needs_watering == False"/>-->
-                    <!--<label for="needs_watering"/>-->
                 </span>
             </xpath>
 
             <xpath expr="//field[@name='categ_id']" position="after">
                 <field name="flower_id"/>
+            </xpath>
+
+            <xpath expr="//field[@name='flower_id']" position="after">
+                <field name="gardener_ids"/>
             </xpath>
 
         </field>
