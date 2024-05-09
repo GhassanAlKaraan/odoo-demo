@@ -13,7 +13,9 @@ class StockWarehouseWeather(models.Model):
     _name = 'stock.warehouse.weather'
     _description = 'Warehouse Weather'
 
+    #
     warehouse_id = fields.Many2one('stock.warehouse', string='Warehouse', required=True, ondelete='cascade')
+    #
     temperature = fields.Float(string='Temperature (°C)')
     pressure = fields.Float(string='Pressure (hPa)')
     humidity = fields.Float(string='Humidity (%)')

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit the warehouse form view -->
+        <record id="view_warehouse_weather_button" model="ir.ui.view">
+            <field name="name">stock.warehouse.weather.button</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/> <!-- Make sure this is the correct view ID -->
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="fetch_weather"
+                            string="Fetch Weather"
+                            type="object"
+                            icon="fa-cloud"
+                            class="oe_stat_button oe_highlight">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Fetch Weather</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

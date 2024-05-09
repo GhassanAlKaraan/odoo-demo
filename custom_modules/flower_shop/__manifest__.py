@@ -14,6 +14,7 @@
         'views/product_views.xml',
         'views/stock_lot_views.xml',
         'views/website_sale_flower_views.xml',
+        'views/stock_warehouse_views.xml',
         'data/ir_actions_server_data.xml',
         'data/groups.xml',
         'data/scheduled_actions.xml',
